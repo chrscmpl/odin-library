@@ -1,0 +1,64 @@
+:root {
+	--ff: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+	--bg-clr: #cbd5e1;
+	--main-clr: #e2e8f0;
+
+	--shadow: 0px 0px 10px #383838;
+	--offset-shadow: 5px 5px 10px #383838;
+	--br: 10px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: var(--ff);
+	min-height: 100vh;
+	width: 100vw;
+	background-color: var(--bg-clr);
+}
+
+.scaffold {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template: auto 1fr / 1fr;
+	grid-template-areas:
+		'header'
+		'content';
+}
+
+.header {
+	grid-area: header;
+	background-color: var(--main-clr);
+	box-shadow: var(--shadow);
+	padding-left: 50px;
+}
+
+.books-grid {
+	grid-area: content;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	padding: 30px;
+}
+
+.card {
+	width: 300px;
+	height: 400px;
+	display: grid;
+
+	background-color: var(--main-clr);
+	border-radius: var(--br);
+	box-shadow: var(--offset-shadow);
+}
+
+.add-card {
+	grid-template: 1fr / 1fr;
+	justify-items: center;
+	align-items: center;
+}
