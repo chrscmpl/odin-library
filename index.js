@@ -7,34 +7,36 @@ function Book(title, author, pages, read) {
 	this.read = read;
 }
 
-//Returns an array of strings to display in each field of a book card
+//Returns an array of properties to display in each field of a book card
 Book.prototype.info = function () {
-	return [
-		this.title.toString(),
-		`by ${this.author}`,
-		`${this.pages} pages long`,
-		this.read ? 'read' : 'not read yet',
-	];
+	let info = [];
+	for (prop in this)
+		if (this.hasOwnProperty(prop)) info.push({ key: prop, value: this[prop] });
+	return info;
 };
 
 //Returns a card element to be added to the DOM
 Book.prototype.card = function () {
 	const card = document.createElement('div');
 	card.classList.add('card');
-	this.info().forEach(info => {
-		const field = document.createElement('div');
-		field.textContent = info;
-		card.appendChild(field);
-	});
-	const removeButton = this.createRemoveButton();
-	card.appendChild(removeButton);
+	this.info().forEach(info => card.appendChild(this.createField(info)));
+	card.appendChild(this.createRemoveButton());
 	return card;
+};
+
+Book.prototype.createField = function (info) {
+	const field = document.createElement('div');
+	field.classList.add(info.key);
+	field.textContent =
+		info.key !== 'read' ? info.value : this[info.key] ? 'Read' : 'Not read yet';
+	return field;
 };
 
 // TODO
 Book.prototype.createRemoveButton = function () {
 	const removeButton = document.createElement('button');
 	removeButton.textContent = 'X';
+	removeButton.addEventListener('click', () => library.remove(this));
 	return removeButton;
 };
 
@@ -60,7 +62,8 @@ Library.prototype.remove = function (book) {
 
 //Makes the grid element's children the books' cards + the original elements (this.children)
 Library.prototype.update = function () {
-	for (card of this.grid.children) card.remove();
+	[...this.grid.children].forEach(card => card.remove());
+	// for (card of this.grid.children) card.remove();
 	for (book of this.books) this.grid.appendChild(book.card());
 	for (child of this.children) this.grid.appendChild(child);
 };

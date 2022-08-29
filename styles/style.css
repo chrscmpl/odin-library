@@ -103,7 +103,7 @@ body {
 }
 
 .popup-container.shown .popup {
-	animation: appear 0.4s ease;
+	animation: appear 0.4s;
 	transform: scale(var(--popup-scale));
 }
 
