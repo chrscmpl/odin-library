@@ -4,6 +4,7 @@
 
 	--bg-clr: #cbd5e1;
 	--main-clr: #e2e8f0;
+	--acc-clr: #f43f5e;
 	--gray1: #62626288;
 	--gray2: #30303088;
 
@@ -48,18 +49,20 @@ body {
 	box-shadow: var(--shadow);
 	padding-left: 50px;
 	font-size: var(--fs-h);
+	border-bottom: 20px solid var(--acc-clr);
 }
 
 .books-grid {
 	grid-area: content;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 	padding: 30px;
+	gap: 13px;
 }
 
 .card {
-	width: 300px;
-	height: 400px;
+	width: 280px;
+	height: 350px;
 	display: grid;
 
 	background-color: var(--main-clr);
