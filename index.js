@@ -32,12 +32,16 @@ Book.prototype.createField = function (info) {
 	return field;
 };
 
-// TODO
+//returns a button element to attach to the card
 Book.prototype.createRemoveButton = function () {
 	const removeButton = document.createElement('button');
 	removeButton.textContent = 'X';
-	removeButton.addEventListener('click', () => library.remove(this));
+	removeButton.addEventListener('click', this.remove.bind(this));
 	return removeButton;
+};
+
+Book.prototype.remove = function () {
+	library.remove(this);
 };
 
 //Interface for storing books that automatically adds them to the DOM

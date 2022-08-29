@@ -3,7 +3,7 @@
 		Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
 	--bg-clr: #cbd5e1;
-	--main-clr: #e2e8f0;
+	--main-clr: #ffffff;
 	--acc-clr: #f43f5e;
 	--gray1: #62626288;
 	--gray2: #30303088;
@@ -12,11 +12,14 @@
 	--fs-h: 2rem;
 	--fs-popup: 0.8rem;
 
+	--fw-n: 500;
+	--fw-b: 600;
+
 	--shadow: 0px 0px 10px #383838;
 	--offset-shadow: 5px 5px 10px #383838;
 	--br: 10px;
 
-	--popup-scale: 150%;
+	--popup-scale: 120%;
 }
 
 * {
@@ -31,6 +34,7 @@ body {
 	width: 100vw;
 	background-color: var(--bg-clr);
 	font-size: var(--fs-p);
+	font-weight: var(--fw-n);
 }
 
 .scaffold {
@@ -64,10 +68,15 @@ body {
 	width: 280px;
 	height: 350px;
 	display: grid;
+	align-content: space-around;
 
 	background-color: var(--main-clr);
 	border-radius: var(--br);
 	box-shadow: var(--offset-shadow);
+}
+
+.card:not(.popup) {
+	justify-content: center;
 }
 
 .add-card {
@@ -96,8 +105,6 @@ body {
 }
 
 .popup {
-	display: grid;
-	align-content: space-around;
 	font-size: var(--fs-popup);
 	padding: 30px;
 }
@@ -107,22 +114,38 @@ body {
 	transform: scale(var(--popup-scale));
 }
 
-.popup section {
-	display: flex;
-	flex-direction: column;
+.popup input:not([type='checkbox']) {
+	width: 100%;
+	padding: 0.5rem 5px;
+	border-radius: var(--br);
+	border: none;
+	outline: none;
+	font-weight: var(--fw-b);
 }
 
 .popup .read-section {
-	flex-direction: row;
-	gap: 10px;
+	display: flex;
+	justify-content: center;
+	gap: 5px;
 }
 
-.popup input {
-	flex: 1;
+.popup .read-section #read {
+	accent-color: var(--acc-clr);
 }
 
-.popup .read-section input {
-	flex: 0;
+.popup .add-button {
+	width: 100%;
+	height: 50px;
+	border-radius: var(--br);
+	margin-bottom: -30px;
+}
+
+button {
+	background-color: var(--acc-clr);
+	border: none;
+	color: var(--main-clr);
+	font-weight: var(--fw-b);
+	font-size: var(--fs-p);
 }
 
 .hidden {
