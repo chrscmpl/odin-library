@@ -23,12 +23,20 @@ Book.prototype.card = function () {
 		field.textContent = info;
 		card.appendChild(field);
 	});
+	const removeButton = this.createRemoveButton();
+	card.appendChild(removeButton);
 	return card;
 };
 
-function Library(grid, blacklist, cards) {
+Book.prototype.createRemoveButton = function () {
+	const removeButton = document.createElement('button');
+	removeButton.textContent = 'X';
+	return removeButton;
+};
+
+function Library(grid, cards) {
 	this.grid = grid;
-	this.blacklist = initArray(blacklist);
+	this.blacklist = initArray(grid.children);
 	this.cards = initArray(cards);
 }
 
@@ -70,11 +78,37 @@ document.querySelector('.popup-container').addEventListener(
 	'click',
 	function (e) {
 		if (e.target !== this) return;
-		this.classList.remove('shown');
+		hidePopup();
 	}.bind(document.querySelector('.popup-container'))
 );
 
-const library = new Library(
-	document.querySelector('.books-grid'),
-	document.querySelector('.add-card')
-);
+document.querySelector('.add-button').addEventListener('click', () => {
+	library.push(
+		new Book(
+			inputs.title.value,
+			inputs.author.value,
+			inputs.pages.value,
+			inputs.read.checked
+		).card()
+	);
+	hidePopup();
+});
+
+function hidePopup() {
+	popupContainer.classList.remove('shown');
+	inputs.title.value = '';
+	inputs.author.value = '';
+	inputs.pages.value = '';
+	inputs.read.checked = false;
+}
+
+const popupContainer = document.querySelector('.popup-container');
+
+const inputs = {
+	title: document.getElementById('title'),
+	author: document.getElementById('author'),
+	pages: document.getElementById('pages'),
+	read: document.getElementById('read'),
+};
+
+const library = new Library(document.querySelector('.books-grid'));

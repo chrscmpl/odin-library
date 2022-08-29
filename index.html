@@ -10,23 +10,35 @@
 		<title>My Library</title>
 	</head>
 	<body>
-		<div class="popup-container">
+		<div class="popup-container hidden">
 			<div class="card popup">
 				<section class="title-section">
-					<label for="title">Title:</label
-					><input type="text" id="title" name="title" />
+					<label class="hidden" for="title">Title:</label
+					><input type="text" id="title" name="title" placeholder="Title" />
 				</section>
 				<section class="author-section">
-					<label for="author">Author:</label
-					><input type="text" id="author" name="author" />
+					<label class="hidden" for="author">Author:</label
+					><input type="text" id="author" name="author" placeholder="Author" />
 				</section>
 				<section class="pages-section">
-					<label for="pages">Number of pages:</label
-					><input type="number" id="pages" name="pages" />
+					<label class="hidden" for="pages">Number of pages:</label
+					><input
+						type="number"
+						id="pages"
+						name="pages"
+						placeholder="Number of Pages"
+					/>
 				</section>
-				<section class="read-section">
+				<section class="read-section button-section">
 					<label for="read">Read</label
 					><input type="checkbox" id="read" name="read" />
+					<button class="add-button" type="button">
+						<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
+							<path
+								d="M10.3 19.7v-6H4.275v-3.4H10.3V4.275h3.4V10.3h6.025v3.4H13.7v6Z"
+							/>
+						</svg>
+					</button>
 				</section>
 			</div>
 		</div>

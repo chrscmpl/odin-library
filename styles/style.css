@@ -84,7 +84,6 @@ body {
 	height: 100vh;
 	justify-content: center;
 	align-items: center;
-	display: none;
 	background-color: var(--gray2);
 	z-index: 1;
 }
@@ -121,6 +120,10 @@ body {
 
 .popup .read-section input {
 	flex: 0;
+}
+
+.hidden {
+	display: none;
 }
 
 @keyframes appear {
