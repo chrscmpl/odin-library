@@ -4,10 +4,18 @@
 
 	--bg-clr: #cbd5e1;
 	--main-clr: #e2e8f0;
+	--gray1: #62626288;
+	--gray2: #30303088;
+
+	--fs-p: 1rem;
+	--fs-h: 2rem;
+	--fs-popup: 0.8rem;
 
 	--shadow: 0px 0px 10px #383838;
 	--offset-shadow: 5px 5px 10px #383838;
 	--br: 10px;
+
+	--popup-scale: 150%;
 }
 
 * {
@@ -21,6 +29,7 @@ body {
 	min-height: 100vh;
 	width: 100vw;
 	background-color: var(--bg-clr);
+	font-size: var(--fs-p);
 }
 
 .scaffold {
@@ -38,6 +47,7 @@ body {
 	background-color: var(--main-clr);
 	box-shadow: var(--shadow);
 	padding-left: 50px;
+	font-size: var(--fs-h);
 }
 
 .books-grid {
@@ -61,4 +71,63 @@ body {
 	grid-template: 1fr / 1fr;
 	justify-items: center;
 	align-items: center;
+}
+
+.add-symbol {
+	transform: scale(600%);
+	fill: var(--gray1);
+}
+
+.popup-container {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
+	display: none;
+	background-color: var(--gray2);
+	z-index: 1;
+}
+
+.popup-container.shown {
+	display: flex;
+}
+
+.popup {
+	display: grid;
+	align-content: space-around;
+	font-size: var(--fs-popup);
+	padding: 30px;
+}
+
+.popup-container.shown .popup {
+	animation: appear 0.4s ease;
+	transform: scale(var(--popup-scale));
+}
+
+.popup section {
+	display: flex;
+	flex-direction: column;
+}
+
+.popup .read-section {
+	flex-direction: row;
+	gap: 10px;
+}
+
+.popup input {
+	flex: 1;
+}
+
+.popup .read-section input {
+	flex: 0;
+}
+
+@keyframes appear {
+	from {
+		transform: scale(0%);
+	}
+	to {
+		transform: scale(var(--popup-scale));
+	}
 }

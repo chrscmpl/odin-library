@@ -7,13 +7,44 @@
 		<link rel="stylesheet" href="./styles/normalize-CSS/normalize.css" />
 		<link rel="stylesheet" href="./styles/style.css" />
 		<script src="./index.js" defer></script>
-		<title>Library</title>
+		<title>My Library</title>
 	</head>
 	<body>
+		<div class="popup-container">
+			<div class="card popup">
+				<section class="title-section">
+					<label for="title">Title:</label
+					><input type="text" id="title" name="title" />
+				</section>
+				<section class="author-section">
+					<label for="author">Author:</label
+					><input type="text" id="author" name="author" />
+				</section>
+				<section class="pages-section">
+					<label for="pages">Number of pages:</label
+					><input type="number" id="pages" name="pages" />
+				</section>
+				<section class="read-section">
+					<label for="read">Read</label
+					><input type="checkbox" id="read" name="read" />
+				</section>
+			</div>
+		</div>
 		<div class="scaffold">
-			<header class="header"><h1>Library</h1></header>
+			<header class="header"><h1>My Library</h1></header>
 			<main class="books-grid">
-				<div class="card add-card">+</div>
+				<div class="card add-card">
+					<svg
+						class="add-symbol"
+						xmlns="http://www.w3.org/2000/svg"
+						height="48"
+						width="48"
+					>
+						<path
+							d="M23.45 36.7V24.55H11.3v-1.1h12.15V11.3h1.1v12.15H36.7v1.1H24.55V36.7Z"
+						/>
+					</svg>
+				</div>
 			</main>
 		</div>
 	</body>
