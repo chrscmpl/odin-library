@@ -1,3 +1,5 @@
+init();
+
 function Book(title, author, pages, read) {
 	this.title = title;
 	this.author = author;
@@ -72,59 +74,50 @@ function initArray(arg) {
 		: [arg];
 }
 
-//bring up popup after clicking on the add card
-document.querySelector('.add-card').addEventListener(
-	'click',
-	function () {
-		this.classList.add('shown');
-	}.bind(document.querySelector('.popup-container'))
-);
+function init() {
+	const library = new Library(document.querySelector('.books-grid'));
+	this.library = library;
 
-//hide popup after clicking outside of it
-document.querySelector('.popup-container').addEventListener(
-	'click',
-	function (e) {
+	const cardAdd = document.querySelector('.add-card');
+	const ButtonAdd = document.querySelector('.add-button');
+	const popup = document.querySelector('.popup-container');
+	const inputs = {
+		title: document.getElementById('title'),
+		author: document.getElementById('author'),
+		pages: document.getElementById('pages'),
+		read: document.getElementById('read'),
+	};
+
+	//bring up popup after clicking on the add card
+	cardAdd.addEventListener('click', function () {
+		popup.classList.add('shown');
+	});
+
+	//hide popup after clicking outside of it
+	popup.addEventListener('click', function (e) {
 		if (e.target !== this) return;
 		hidePopup();
-	}.bind(document.querySelector('.popup-container'))
-);
+	});
 
-// add a new book to the library and hide the popup after clicking on the add button on the popup
-document.querySelector('.add-button').addEventListener(
-	'click',
-	function () {
+	// add a new book to the library and hide the popup after clicking on the add button on the popup
+	ButtonAdd.addEventListener('click', function () {
 		library.push(
 			new Book(
-				this.title.value,
-				this.author.value,
-				this.pages.value,
-				this.read.checked
+				inputs.title.value,
+				inputs.author.value,
+				inputs.pages.value,
+				inputs.read.checked
 			)
 		);
 		hidePopup();
-	}.bind({
-		title: document.getElementById('title'),
-		author: document.getElementById('author'),
-		pages: document.getElementById('pages'),
-		read: document.getElementById('read'),
-	})
-);
+	});
 
-//hide the popup and reset every input in the popup
-const hidePopup = function () {
-	this.popup.classList.remove('shown');
-	this.inputs.title.value = '';
-	this.inputs.author.value = '';
-	this.inputs.pages.value = '';
-	this.inputs.read.checked = false;
-}.bind({
-	popup: document.querySelector('.popup-container'),
-	inputs: {
-		title: document.getElementById('title'),
-		author: document.getElementById('author'),
-		pages: document.getElementById('pages'),
-		read: document.getElementById('read'),
-	},
-});
-
-const library = new Library(document.querySelector('.books-grid'));
+	//hide the popup and reset every input in the popup
+	const hidePopup = function () {
+		popup.classList.remove('shown');
+		inputs.title.value = '';
+		inputs.author.value = '';
+		inputs.pages.value = '';
+		inputs.read.checked = false;
+	};
+}
