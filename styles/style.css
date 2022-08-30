@@ -4,13 +4,15 @@
 
 	--bg-clr: #cbd5e1;
 	--main-clr: #ffffff;
-	--acc-clr: #f43f5e;
+	--acc-clr1: #f43f5e;
+	--acc-clr2: #fda4af;
 	--gray1: #62626288;
 	--gray2: #30303088;
 
-	--fs-p: 1rem;
+	--fs-p: 1.5rem;
 	--fs-h: 2rem;
 	--fs-popup: 0.8rem;
+	--fs-button: 1.2rem;
 
 	--fw-n: 500;
 	--fw-b: 600;
@@ -53,19 +55,20 @@ body {
 	box-shadow: var(--shadow);
 	padding-left: 50px;
 	font-size: var(--fs-h);
-	border-bottom: 20px solid var(--acc-clr);
+	border-bottom: 20px solid var(--acc-clr1);
 }
 
 .books-grid {
 	grid-area: content;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(min(280px, 80vw), 1fr));
+	justify-items: center;
 	padding: 30px;
 	gap: 13px;
 }
 
 .card {
-	width: 280px;
+	width: min(280px, 80vw);
 	height: 350px;
 	display: grid;
 	align-content: space-around;
@@ -77,6 +80,27 @@ body {
 
 .card:not(.popup) {
 	justify-content: center;
+	align-content: stretch;
+	align-items: center;
+	grid-template-columns: 1fr 1fr;
+}
+
+.card:not(.popup) > :not(button) {
+	justify-self: center;
+	grid-column-end: span 2;
+}
+
+.card:not(.popup) > button {
+	align-self: stretch;
+	border: 2px solid var(--main-clr);
+}
+
+.card button.read-field.read {
+	background-color: var(--acc-clr1);
+}
+
+.card button.read-field.not-read {
+	background-color: var(--acc-clr2);
 }
 
 .add-card {
@@ -121,6 +145,11 @@ body {
 	border: none;
 	outline: none;
 	font-weight: var(--fw-b);
+	background-color: var(--acc-clr2);
+}
+
+::placeholder {
+	color: var(--main-clr);
 }
 
 .popup .read-section {
@@ -130,22 +159,22 @@ body {
 }
 
 .popup .read-section #read {
-	accent-color: var(--acc-clr);
+	accent-color: var(--acc-clr2);
 }
 
 .popup .add-button {
 	width: 100%;
 	height: 50px;
-	border-radius: var(--br);
 	margin-bottom: -30px;
 }
 
 button {
-	background-color: var(--acc-clr);
+	border-radius: var(--br);
+	background-color: var(--acc-clr1);
 	border: none;
 	color: var(--main-clr);
 	font-weight: var(--fw-b);
-	font-size: var(--fs-p);
+	font-size: var(--fs-button);
 }
 
 .hidden {

@@ -25,23 +25,39 @@ Book.prototype.card = function () {
 };
 
 Book.prototype.createField = function (info) {
-	const field = document.createElement('div');
-	field.classList.add(info.key);
-	field.textContent =
-		info.key !== 'read' ? info.value : this[info.key] ? 'Read' : 'Not read yet';
+	let field;
+	if (info.key !== 'read') {
+		field = document.createElement('div');
+		field.textContent = info.value;
+	} else field = this.createReadField(info);
+	field.classList.add(`${info.key}-field`);
+	return field;
+};
+
+Book.prototype.createReadField = function (info) {
+	const field = document.createElement('button');
+	field.setAttribute('type', 'button');
+	field.textContent = this[info.key] ? 'Read' : 'Not read yet';
+	field.classList.add(this[info.key] ? 'read' : 'not-read');
+	field.addEventListener('click', this.toggleRead.bind(this));
 	return field;
 };
 
 //returns a button element to attach to the card
 Book.prototype.createRemoveButton = function () {
 	const removeButton = document.createElement('button');
-	removeButton.textContent = 'X';
+	removeButton.classList.add('remove-button');
+	removeButton.textContent = 'Remove';
 	removeButton.addEventListener('click', this.remove.bind(this));
 	return removeButton;
 };
 
 Book.prototype.remove = function () {
 	library.remove(this);
+};
+
+Book.prototype.toggleRead = function () {
+	library.toggleRead(this);
 };
 
 //Interface for storing books that automatically adds them to the DOM
@@ -61,6 +77,14 @@ Library.prototype.push = function (book) {
 //Removes book from library and updates the DOM
 Library.prototype.remove = function (book) {
 	this.books = this.books.filter(elem => elem !== book);
+	this.update();
+};
+
+Library.prototype.toggleRead = function (book) {
+	this.books = this.books.map(elem => {
+		if (elem === book) elem.read = !elem.read;
+		return elem;
+	});
 	this.update();
 };
 
@@ -108,6 +132,7 @@ function init() {
 
 	// add a new book to the library and hide the popup after clicking on the add button on the popup
 	ButtonAdd.addEventListener('click', function () {
+		if (isEmpty(inputs.title.value) || isEmpty(inputs.author.value)) return;
 		library.push(
 			new Book(
 				inputs.title.value,
@@ -127,4 +152,8 @@ function init() {
 		inputs.pages.value = '';
 		inputs.read.checked = false;
 	};
+}
+
+function isEmpty(str) {
+	return str ? !str.trim().length : !str;
 }
