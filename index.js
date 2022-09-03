@@ -9,7 +9,7 @@ class Book {
 	//Returns an array of properties to display in each field of a book card
 	info() {
 		let info = [];
-		for (prop in this)
+		for (const prop in this)
 			if (this.hasOwnProperty(prop))
 				info.push({ key: prop, value: this[prop] });
 		return info;
@@ -94,8 +94,8 @@ class Library {
 	update() {
 		[...this.grid.children].forEach(card => card.remove());
 		// for (card of this.grid.children) card.remove();
-		for (book of this.books) this.grid.appendChild(book.card());
-		for (child of this.children) this.grid.appendChild(child);
+		for (const book of this.books) this.grid.appendChild(book.card());
+		for (const child of this.children) this.grid.appendChild(child);
 	}
 }
 
@@ -110,7 +110,7 @@ function initArray(arg) {
 
 function init() {
 	const library = new Library(document.querySelector('.books-grid'));
-	this.library = library;
+	this.library = library; // this = window
 
 	const cardAdd = document.querySelector('.add-card');
 	const ButtonAdd = document.querySelector('.add-button');
